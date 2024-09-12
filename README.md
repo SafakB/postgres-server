@@ -54,7 +54,7 @@ pgClient.on('notification', (msg) => {
 ```
 
 
-## ℹ️ RLS INFO
+## 🔒 RLS INFO
 
 #### Example JWT Data
 ```json
