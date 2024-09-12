@@ -2,7 +2,7 @@
 
 Document is soon...
 
-### Example Database
+### 💾 Example Database
 
 Database Name : `blog`
 
@@ -13,7 +13,7 @@ Database Name : `blog`
 | post_categories | `id`,`post_id`,`catgory_id` |  |
 
 
-### PostgreSQL Trigger Function
+### 🔨 PostgreSQL Trigger Function
 
 ```sql
 CREATE OR REPLACE FUNCTION notify_category_changes()
@@ -25,7 +25,7 @@ END;
 $$ LANGUAGE plpgsql
 ```
 
-### PostgreSQL Trigger
+### 🔨 PostgreSQL Trigger
 
 for `insert`,`update` and `delete`
 
@@ -33,4 +33,15 @@ for `insert`,`update` and `delete`
 CREATE TRIGGER category_changes_trigger
 AFTER INSERT OR UPDATE OR DELETE ON categories
 FOR EACH ROW EXECUTE FUNCTION notify_category_changes();
+```
+
+### 👂 Listen Postgre Changes on Socket.IO
+
+```js
+pgClient.query('LISTEN category_changes');
+
+pgClient.on('notification', (msg) => {
+  const payload = JSON.parse(msg.payload);
+  io.emit('categoryChanges', payload); // or any logic
+});
 ```
