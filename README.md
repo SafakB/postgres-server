@@ -2,6 +2,15 @@
 
 Document is soon...
 
+### Example Database
+
+Database Name : `blog`
+
+| Table | Fields | Description |
+| ------ | ------ | ------ |
+| categories | `id`,`title` | Realtime Activated |
+| posts | `id`,`title`,`contet` | RLS Enabled |
+| post_categories | `id`,`post_id`,`catgory_id` |  |
 
 
 ### PostgreSQL Trigger Function
