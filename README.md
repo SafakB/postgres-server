@@ -2,7 +2,7 @@
 
 Document is soon...
 
-## First things first
+## First things first (docker.compose.yml)
 - User, passwords
 - IP (if you needed)
 - Jwt secret key (if you needed) (must be 32 characters)
@@ -17,7 +17,7 @@ Database Name : `blog`
 | ------ | ------ | ------ |
 | categories | `id`,`title` | Realtime Activated |
 | posts | `id`,`title`,`contet` | RLS Enabled (with JWT) |
-| post_categories | `id`,`post_id`,`catgory_id` |  |
+| post_categories | `id`,`post_id`,`catgory_id` | `post_id_fkey`,`catgory_id_fkey`  |
 
 
 ### 🔨 PostgreSQL Trigger Function
@@ -59,7 +59,7 @@ pgClient.on('notification', (msg) => {
 #### Example JWT Data
 ```json
 {
-  "sub": "72ba45e4-fa0a-4ba5-a955-1c643508eed1", // UUID
+  "sub": "72ba45e4-fa0a-4ba5-a955-1c643508eed1", /* UUID*/
   "iat": 1516239022
 }
 ```
