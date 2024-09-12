@@ -5,7 +5,7 @@ Document is to be contuined...
 | App | URL | Description |
 | ------ | ------ | ------ |
 | PostgreSQL | `127.0.0.1:5432` |  |
-| PostgREST | `http://127.0.0.1:3000/` | `/` |
+| PostgREST | `http://127.0.0.1:3000/` | `/<table_name>`,`/categories`,`/categories?id=gt.3` |
 | Open Api | `http://127.0.0.1:3000/` |  |
 | Swagger | `http://127.0.0.1:8080/` |  |
 | Socket.IO | `http://127.0.0.1:4000/` |  |
