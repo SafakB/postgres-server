@@ -1,15 +1,15 @@
 # Postgres + PosgREST + Socket.IO + Nginx + Certbot
 
-✨ We are nearing the end...
-🔥 SSL certificate is now obtained automatically
-👣 A few more steps for the production version
+- ✨ We are nearing the end...
+- 🔥 SSL certificate is now obtained automatically
+- 👣 A few more steps for the production version
 
 🏗️I will work a little more on the documentation...
 
 ## URLs with Nginx
 | App | URL | Description |
 | ------ | ------ | ------ |
-| PostgreSQL | `127.0.0.1:5432` |  |
+| PostgreSQL | `domain.com:5432` |  |
 | PostgREST | `https://domain.com/` | `/<table_name>`,`/categories`,`/categories?id=gt.3` |
 | Open Api | `https://domain.com/` | Auto generated |
 | Swagger | `http://domain.com:8080/` | Auto generated (Non-SSL) |
@@ -24,16 +24,16 @@
 | Swagger | `http://127.0.0.1:8080/` | Auto generated |
 | Socket.IO | `http://127.0.0.1:4000/` | Auto working `/socket/index.js` |
 
-## First things first (docker.compose.yml)
+## ⚠️ First things first (docker.compose.yml)
 - Domain name (To use with nginx)
 - User, passwords 
 - IP (if you needed)
 - Jwt secret key (if you needed) (must be 32 characters)
 - Database user,roles and privileges
 
-## First things first (nginx.conf)
--- Put the SSL block on the comment line for the first run
--- Remove the comment lines afterwards because SSL will be received on the first run
+## ⚠️ First things first (nginx.conf)
+- Put the SSL block on the comment line for the first run
+- Remove the comment lines afterwards because SSL will be received on the first run
 
 ```conf
     # First run disable this block
@@ -46,6 +46,7 @@
 
 ### 🔐 SSL Renewal
 Run this command
+
 `docker compose run certbot certonly --webroot --webroot-path=/var/www/certbot/ -d domain.com`
 
 ### 💾 Example Database
@@ -141,12 +142,12 @@ $$;
 
 ### 📄 Example PostgREST queries
 
-`https://domain.com/posts?id=eq.2`
-`https://domain.com/categories?id=gt.8`
-`https://domain.com/categories?id=in.(1,2,3)`
-`https://domain.com/categories?order=id.desc`
-`https://domain.com/categories?title=like.*life*`
-`https://domain.com/categories?or=(id.eq.1,title.like.*tamer*)`
-`https://domain.com/categories?select=myCatId:id,myTitle:title`
-`https://domain.com/categories?select=id,json_data->>slug,json_data->created_at`
-`https://domain.com/posts_categories?select=id,category:categories(id,title),post:posts(id,title)` (foreign key must be defined)
+- `https://domain.com/posts?id=eq.2`
+- `https://domain.com/categories?id=gt.8`
+- `https://domain.com/categories?id=in.(1,2,3)`
+- `https://domain.com/categories?order=id.desc`
+- `https://domain.com/categories?title=like.*life*`
+- `https://domain.com/categories?or=(id.eq.1,title.like.*tamer*)`
+- `https://domain.com/categories?select=myCatId:id,myTitle:title`
+- `https://domain.com/categories?select=id,json_data->>slug,json_data->created_at`
+- `https://domain.com/posts_categories?select=id,category:categories(id,title),post:posts(id,title)` (foreign key must be defined)
