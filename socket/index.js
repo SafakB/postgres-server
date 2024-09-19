@@ -24,8 +24,10 @@ pgClient.connect();
 pgClient.query('LISTEN category_changes');
 
 pgClient.on('notification', (msg) => {
-  const payload = JSON.parse(msg.payload);
-  io.emit('categoryChanges', payload);
+  if (msg.payload != '') {
+    const payload = JSON.parse(msg.payload);
+    io.emit('categoryChanges', payload);
+  }
 });
 
 io.on('connection', (socket) => {
@@ -35,10 +37,12 @@ io.on('connection', (socket) => {
     console.log(`İstemci ${categoryId} ID'sine sahip kayıtları dinliyor.`);
 
     pgClient.on('notification', (msg) => {
-      const payload = JSON.parse(msg.payload);
-      console.log(payload);
-      if (payload.id === parseInt(categoryId, 10)) {
-        socket.emit(`categoryChange-${categoryId}`, payload);
+      if (msg.payload != '') {
+        const payload = JSON.parse(msg.payload);
+        console.log(payload);
+        if (payload.id === parseInt(categoryId, 10)) {
+          socket.emit(`categoryChange-${categoryId}`, payload);
+        }
       }
     });
   });
@@ -47,4 +51,3 @@ io.on('connection', (socket) => {
 server.listen(4000, () => {
   console.log('Socket.IO sunucusu 4000 portunda çalışıyor');
 });
-

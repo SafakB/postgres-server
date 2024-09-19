@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Test</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <style>
+        .status {
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        .status.active {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h3><span class="status"></span></h3>
+    <h1>Categories Changes</h1>
+    <ul id="changes"></ul>
+
+    <script>
+        // Connect Socket.IO
+        const socket = io('https://domain.com');
+
+        // listen 'connect' event
+        socket.on('connect', function () {
+            const status = document.querySelector('.status');
+            status.classList.add('active');
+        });
+
+        // listen 'disconnect' event
+        socket.on('disconnect', function () {
+            const status = document.querySelector('.status');
+            status.classList.remove('active');
+        });
+
+        // listen 'categoryChanges' event
+        socket.on('categoryChanges', function (data) {
+            const changesList = document.getElementById('changes');
+            const newItem = document.createElement('li');
+            newItem.textContent = JSON.stringify(data);
+            changesList.appendChild(newItem);
+        });
+
+        // listen 'categoryChange' event with categoryId
+        let categoryId = 5
+        socket.emit('listenCategoryId', categoryId);
+        socket.on(`categoryChange-${categoryId}`, function (data) {
+            const textContent = JSON.stringify(data);
+            alert(textContent);
+        });
+    </script>
+</body>
+
+</html>
