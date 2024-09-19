@@ -1,0 +1,48 @@
+version: '3'
+services:
+  server:
+    image: postgrest/postgrest
+    ports:
+      - "3000:3000"
+    environment:
+      PGRST_DB_URI: postgres://test_user:123456@db:5432/blog
+      PGRST_OPENAPI_SERVER_PROXY_URI: http://127.0.0.1:3000
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: web_anon
+      PGRST_JWT_SECRET: "varmB8bXwQzn91ZLxHFJhXEy6S3cN3sB"
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: blog
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+  # comment this if you want to no persist the data.
+    volumes:
+      - "./pgdata:/var/lib/postgresql/data"
+  swagger:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    environment:
+      API_URL: http://127.0.0.1:3000/
+  socket:
+    image: node:14
+    working_dir: /app
+    volumes:
+      - ./socket:/app
+    command: "npm start"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    environment:
+      PGHOST: db
+      PGUSER: test_user
+      PGPASSWORD: 123456
+      PGDATABASE: blog
