@@ -85,3 +85,6 @@ services:
     networks:
       - app-network
     restart: no
+networks:
+  app-network:
+    driver: bridge
