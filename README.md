@@ -6,7 +6,7 @@
 
 🏗️I will work a little more on the documentation...
 
-## URLs with Nginx
+## 🌐 URLs with Nginx
 | App | URL | Description |
 | ------ | ------ | ------ |
 | PostgreSQL | `domain.com:5432` |  |
@@ -25,13 +25,14 @@
 | Socket.IO | `http://127.0.0.1:4000/` | Auto working `/socket/index.js` |
 
 ## ⚠️ First things first (docker.compose.yml)
-- Domain name (To use with nginx)
+- Organize your domain name (To use with nginx)
 - User, passwords 
 - IP (if you needed)
 - Jwt secret key (if you needed) (must be 32 characters)
 - Database user,roles and privileges
 
 ## ⚠️ First things first (nginx.conf)
+- Organize your domain name
 - Put the SSL block on the comment line for the first run
 - Remove the comment lines afterwards because SSL will be received on the first run
 
