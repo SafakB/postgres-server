@@ -1,4 +1,7 @@
-![image](https://github.com/user-attachments/assets/dd7baae4-c968-47f0-981a-da875d40d323)
+<p align="center">
+<img src="https://github.com/user-attachments/assets/dd7baae4-c968-47f0-981a-da875d40d323#gh-light-mode-only">
+<img src="https://github.com/user-attachments/assets/dd7baae4-c968-47f0-981a-da875d40d323#gh-dark-mode-only">
+</p>
 
 
 # Postgres + PosgREST + Socket.IO + Nginx + Certbot
